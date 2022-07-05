@@ -1,7 +1,8 @@
 import React, { createContext, useState, useContext } from 'react';
+
+import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai';
 import {
   Container,
-  Frame,
   Title,
   Item,
   Header,
@@ -29,14 +30,6 @@ Accordion.Title = function AccordionTitle({ children, ...restProps }) {
   );
 };
 
-Accordion.Frame = function AccordionFrame({ children, ...restProps }) {
-  return (
-    <Frame {...restProps}>
-      {children}
-    </Frame>
-  );
-};
-
 Accordion.Item = function AccordionItem({ children, ...restProps }) {
   const [toggleShow, setToggleShow] = useState(false);
 
@@ -52,18 +45,23 @@ Accordion.Item = function AccordionItem({ children, ...restProps }) {
 
 Accordion.Header = function AccordionHeader({ children, ...restProps }) {
   // eslint-disable-next-line no-unused-vars
-  const { toggleShow, setToggleShow } = useContext();
+  const { toggleShow, setToggleShow } = useContext(ToggleContext);
 
   return (
     // eslint-disable-next-line no-shadow
     <Header onClick={() => setToggleShow((toggleShow) => !toggleShow)} {...restProps}>
       {children}
+      {toggleShow ? (
+        <AiOutlineClose />
+      ) : (
+        <AiOutlinePlus />
+      )}
     </Header>
   );
 };
 
 Accordion.Body = function AccordionBody({ children, ...restProps }) {
-  const { toggleShow } = useContext();
+  const { toggleShow } = useContext(ToggleContext);
 
   return toggleShow ? (
     <Body {...restProps}>

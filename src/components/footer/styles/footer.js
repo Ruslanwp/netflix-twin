@@ -49,5 +49,5 @@ export const Text = styled.p`
 
 export const Break = styled.p`
   flex-basis: 100%;
-  heigth: 0;
+  height: 0;
 `;
